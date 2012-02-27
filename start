@@ -1,0 +1,6 @@
+#!/bin/bash
+# The logic to start up your application should be put in this
+# script. The application will work only if it binds to
+# $OPENSHIFT_INTERNAL_IP:8080
+cd $OPENSHIFT_REPO_DIR/raw
+nohup ./hello >${OPENSHIFT_LOG_DIR}/hello.log 2>&1 &
