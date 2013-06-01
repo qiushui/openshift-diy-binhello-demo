@@ -49,19 +49,25 @@ int main (int argc, char *argv[])
   char *env_openshift_port;
 
   env_openshift_ipstr = getenv("OPENSHIFT_INTERNAL_IP");
+  if (NULL == env_openshift_ipstr) {
+    env_openshift_ipstr = getenv("OPENSHIFT_DIY_IP");
+  }
   env_openshift_port = getenv("OPENSHIFT_INTERNAL_PORT");
+  if (NULL == env_openshift_port) {
+    env_openshift_port = getenv("OPENSHIFT_DIY_PORT");
+  }
 
   if (env_openshift_ipstr == NULL) {
-    fprintf(stderr, "OPENSHIFT_INTERNAL_IP is not defined\n");
+    fprintf(stderr, "OPENSHIFT_DIY_IP is not defined\n");
     return 1;
   }
   if (env_openshift_port == NULL) {
-    fprintf(stderr, "OPENSHIFT_INTERNAL_PORT is not defined\n");
+    fprintf(stderr, "OPENSHIFT_DIY_PORT is not defined\n");
     return 1;
   }
 
-  fprintf(stderr, "OPENSHIFT_INTERNAL_IP is %s\n",  env_openshift_ipstr);
-  fprintf(stderr, "OPENSHIFT_INTERNAL_PORT is %s\n", env_openshift_port);
+  fprintf(stderr, "OPENSHIFT_DIY_IP is %s\n",  env_openshift_ipstr);
+  fprintf(stderr, "OPENSHIFT_DIY_PORT is %s\n", env_openshift_port);
 
   port = (unsigned short) atoi(env_openshift_port);
   if (port == 0) {
